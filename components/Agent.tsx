@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/actions/auth.action";
-// import { createFeedback } from "@/lib/actions/general.action";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -103,6 +102,9 @@ const handleGenerateFeedback = async (messages: SavedMessage[])=>{
 }
 
  useEffect(()=>{
+  if (messages.length > 0) {
+      setLastMessage(messages[messages.length - 1].content);
+    }
   if(callStatus=== CallStatus.FINISHED){
     if(type=== 'generate'){
       router.push('/');
@@ -111,7 +113,8 @@ const handleGenerateFeedback = async (messages: SavedMessage[])=>{
       handleGenerateFeedback(messages);
     }
   }
- })
+ },[messages,callStatus,router]);
+
   const handleCall = async () => {
     setCallStatus(CallStatus.CONNECTING);
 
@@ -156,7 +159,7 @@ const handleGenerateFeedback = async (messages: SavedMessage[])=>{
         <div className="card-interviewer">
           <div className="avatar">
             <Image
-              src="/ai-avatar.png"
+              src="/aiavatar.png"
               alt="profile-image"
               width={65}
               height={54}
@@ -171,7 +174,7 @@ const handleGenerateFeedback = async (messages: SavedMessage[])=>{
         <div className="card-border">
           <div className="card-content">
             <Image
-              src="/user-avatar.png"
+              src="/useravatar.png"
               alt="profile-image"
               width={539}
               height={539}
