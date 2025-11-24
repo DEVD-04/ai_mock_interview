@@ -155,35 +155,32 @@ End the conversation on a polite and positive note.
   },
 };
 
+
 export const feedbackSchema = z.object({
   totalScore: z.number(),
-  categoryScores: z.tuple([
-    z.object({
-      name: z.literal("Communication Skills"),
+  // use an object with named properties instead of a tuple
+  categoryScores: z.object({
+    "Communication Skills": z.object({
       score: z.number(),
       comment: z.string(),
     }),
-    z.object({
-      name: z.literal("Technical Knowledge"),
+    "Technical Knowledge": z.object({
       score: z.number(),
       comment: z.string(),
     }),
-    z.object({
-      name: z.literal("Problem Solving"),
+    "Problem Solving": z.object({
       score: z.number(),
       comment: z.string(),
     }),
-    z.object({
-      name: z.literal("Cultural Fit"),
+    "Cultural Fit": z.object({
       score: z.number(),
       comment: z.string(),
     }),
-    z.object({
-      name: z.literal("Confidence and Clarity"),
+    "Confidence and Clarity": z.object({
       score: z.number(),
       comment: z.string(),
     }),
-  ]),
+  }),
   strengths: z.array(z.string()),
   areasForImprovement: z.array(z.string()),
   finalAssessment: z.string(),
